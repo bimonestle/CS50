@@ -53,10 +53,10 @@ int stringLen(char *string) {
 
 int nonAlph(char *string) {
     int i;
-    for (i = 0; string[i] < 65 && string[i] > 122; i++);
+    for (i = 0; string[i] < 65 || string[i] > 122; i++);
     printf("Only alphabet allowed\n");
 
-    return 1;
+    return 0;
 }
 
 int checkRepeatChar(char *string) {
@@ -64,21 +64,22 @@ int checkRepeatChar(char *string) {
     int count = 0;
     int length = stringLen(string);
 
+    // printf("%s\n", string);
     for (i = 0; i < length; i++)
     {
         printf("%c", string[i]);
-        for (int j = 0; j < count; j++)
+        for (int j = 0; string[j] != '\0'; j++)
         {
-            if (string[j] == 'b')
+            if (string[i] == string[j])
             {
                 count++;
             }
         }
     }
-    if (count > 0)
+    printf("%i\n", count);
+    if (count > length)
     {
-        printf("There are multiple characters");
-        count++;
+        printf("Key must not contain repeated characters");
     }
     return count;
 }
