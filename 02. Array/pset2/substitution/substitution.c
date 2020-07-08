@@ -24,6 +24,12 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
+int keyMapping() {
+    
+
+    return 0;
+}
+
 int valKey(char *key) {
     int length = keyLen(key);
     int checkAlph = nonAlph(key);
@@ -44,9 +50,18 @@ int valKey(char *key) {
             exit(1);
         }
 
-        printf("Type something: ");
+        printf("Plain Text: ");
         characters = getline(&sentence, &buffsize, stdin);
-        printf("You typed: '%s'\n", sentence);
+        // printf("Cipher Text: %c\n", sentence[0]);
+        printf("bimo %c\n", key[0]);
+        printf("Cipher Text: ");
+        for (int i = 0; sentence[i] != '\0'; i++)
+        {
+            // printf("%i", sentence[i]);
+            // printf("%i", (int)sentence[i]);
+            printf("%c", key[(int)sentence[i] - 65]);
+        }
+        
     }
 
     return 0;
