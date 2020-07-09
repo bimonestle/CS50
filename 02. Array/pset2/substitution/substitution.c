@@ -36,6 +36,7 @@ int valKey(char *key) {
     // printf("ngetes doang ini. %i\n", checkAlph);
     // printf("It is %c", key[1]);
     int repeatChar = checkRepeatChar(key);
+    char *tempKey = key;
     if (length == 26 && repeatChar == 26 && checkAlph < 1)
     {
         printf("This is testing\n");
@@ -55,6 +56,7 @@ int valKey(char *key) {
         // printf("Cipher Text: %c\n", sentence[0]);
         printf("bimo %c\n", key[0]);
         printf("Cipher Text: ");
+        printf("tempKey %c\n", tempKey[0]);
         for (int i = 0; sentence[i] != '\0'; i++)
         {
             // printf("%i", sentence[i]);
@@ -65,7 +67,7 @@ int valKey(char *key) {
             }
             else if ((int)sentence[i] >= 97 && (int)sentence[i] <= 122)
             {
-                printf("%c", key[(int)sentence[i] - 97]);
+                printf("%c", key[(int)sentence[i] - 97] + 32);
             }
             else
             {
