@@ -59,7 +59,18 @@ int valKey(char *key) {
         {
             // printf("%i", sentence[i]);
             // printf("%i", (int)sentence[i]);
-            printf("%c", key[(int)sentence[i] - 65]);
+            if ((int)sentence[i] >= 65 && (int)sentence[i] <= 90)
+            {
+                printf("%c", key[(int)sentence[i] - 65]);
+            }
+            else if ((int)sentence[i] >= 97 && (int)sentence[i] <= 122)
+            {
+                printf("%c", key[(int)sentence[i] - 97]);
+            }
+            else
+            {
+                printf("%c", sentence[i]);
+            }
         }
         
     }
