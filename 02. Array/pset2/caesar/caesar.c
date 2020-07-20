@@ -6,6 +6,7 @@
 int countArgv(int count, char *arg[]);
 int readKey(char *arg[]);
 int valKey(char *arg[]);
+int getSentence(char *arg[]);
 
 int main(int argc, char *argv[])
 {
@@ -20,6 +21,7 @@ int countArgv(int count, char *arg[]) {
     if (count == 2 && valid > 0)
     {
         printf("Success\n");
+        getSentence(&arg[0]);
         return 1;
     }
     else
@@ -50,5 +52,28 @@ int valKey(char *arg[]) {
             break;
         }
     }
+    return 1;
+}
+
+int getSentence(char *arg[]) {
+    printf("This is %i\n", atoi(*arg));
+    char *buffer;
+    size_t buffsize = 32;
+    size_t characters;
+
+    buffer = (char *) malloc(buffsize * sizeof(char));
+    if (buffer == NULL)
+    {
+        perror("Unable to locate buffer");
+    }
+    printf("Plain Text: ");
+    characters = getline(&buffer, &buffsize, stdin);
+    printf("%zu characters were read.\n", characters);
+    int length = strlen(buffer) - 1;
+    for (int i = 0; i < length; i++)
+    {
+        printf("%c", (int)buffer[i] + atoi(*arg));
+    }
+    
     return 1;
 }
