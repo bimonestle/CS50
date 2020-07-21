@@ -60,8 +60,10 @@ int getSentence(char *arg[]) {
     char *buffer;
     size_t buffsize = 32;
     size_t characters;
+    char *result;
 
     buffer = (char *) malloc(buffsize * sizeof(char));
+    result = (char *) malloc(buffsize * sizeof(char));
     if (buffer == NULL)
     {
         perror("Unable to locate buffer");
@@ -72,8 +74,11 @@ int getSentence(char *arg[]) {
     int length = strlen(buffer) - 1;
     for (int i = 0; i < length; i++)
     {
-        printf("%c", (int)buffer[i] + atoi(*arg));
+        // printf("%c", (int)buffer[i] + atoi(*arg));
+        *result = (int)buffer[i] + atoi(*arg);
+        printf("%s", result);
     }
+    printf("\nCipher Text: %s", result);
     
     return 1;
 }
