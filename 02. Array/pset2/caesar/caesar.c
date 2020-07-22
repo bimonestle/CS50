@@ -61,6 +61,8 @@ int getSentence(char *arg[]) {
     size_t buffsize = 32;
     size_t characters;
     char *result;
+    int tempChar;
+    char test;
 
     buffer = (char *) malloc(buffsize * sizeof(char));
     result = (char *) malloc(buffsize * sizeof(char));
@@ -75,8 +77,13 @@ int getSentence(char *arg[]) {
     for (int i = 0; i < length; i++)
     {
         // printf("%c", (int)buffer[i] + atoi(*arg));
-        *result = (int)buffer[i] + atoi(*arg);
-        printf("%s", result);
+        // *result = (int)buffer[i] + atoi(*arg);
+        tempChar = (int)buffer[i] + atoi(*arg);
+        test = tempChar;
+        // sprintf(result, "%d", test);
+        printf("%s", &test);
+        // strcpy(result, &test);
+        strcat(result, &test);
     }
     printf("\nCipher Text: %s", result);
     
