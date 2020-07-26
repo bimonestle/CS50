@@ -78,12 +78,26 @@ int getSentence(char *key[]) {
     int length = strlen(buffer) - 1;
     for (int i = 0; i < length; i++)
     {
-        // printf("%c", (int)buffer[i] + atoi(*key));
-        // *result = (int)buffer[i] + atoi(*key);
-        tempChar = (int)buffer[i] + atoi(*key);
-        test = tempChar;
-        snprintf(result, *buffer, "%c", test); // convert int to string
-        printf("%s", result);
+        if ((int)buffer[i] > 64 && (int)buffer[i] < 91)
+        {
+            tempChar = (int)buffer[i] + atoi(*key);
+            test = tempChar;
+            snprintf(result, *buffer, "%c", test); // convert int to string
+            printf("%s", result);
+        }
+        else if ((int)buffer[i] > 96 && (int)buffer[i] < 123)
+        {
+            tempChar = (int)buffer[i] + atoi(*key);
+            test = tempChar;
+            snprintf(result, *buffer, "%c", test); // convert int to string
+            printf("%s", result);
+        }
+        else
+        {
+            snprintf(result, *buffer, "%c", buffer[i]); // convert int to string
+            printf("%s", result);
+        }
+        
         strcat(apa, result);
     }
     printf("\nCipher Text: %s", apa);
