@@ -55,17 +55,19 @@ int valKey(char *arg[]) {
     return 1;
 }
 
-int getSentence(char *arg[]) {
-    printf("This is %i\n", atoi(*arg));
-    char *buffer;
+int getSentence(char *key[]) {
+    printf("This is %i\n", atoi(*key));
+    char* buffer;
     size_t buffsize = 32;
     size_t characters;
-    char *result;
+    char* result;
     int tempChar;
     char test;
+    char* apa;
 
     buffer = (char *) malloc(buffsize * sizeof(char));
     result = (char *) malloc(buffsize * sizeof(char));
+    apa = (char *) malloc(buffsize * sizeof(char));
     if (buffer == NULL)
     {
         perror("Unable to locate buffer");
@@ -76,16 +78,15 @@ int getSentence(char *arg[]) {
     int length = strlen(buffer) - 1;
     for (int i = 0; i < length; i++)
     {
-        // printf("%c", (int)buffer[i] + atoi(*arg));
-        // *result = (int)buffer[i] + atoi(*arg);
-        tempChar = (int)buffer[i] + atoi(*arg);
+        // printf("%c", (int)buffer[i] + atoi(*key));
+        // *result = (int)buffer[i] + atoi(*key);
+        tempChar = (int)buffer[i] + atoi(*key);
         test = tempChar;
-        // sprintf(result, "%d", test);
-        printf("%s", &test);
-        // strcpy(result, &test);
-        strcat(result, &test);
+        snprintf(result, *buffer, "%c", test); // convert int to string
+        printf("%s", result);
+        strcat(apa, result);
     }
-    printf("\nCipher Text: %s", result);
+    printf("\nCipher Text: %s", apa);
     
     return 1;
 }
