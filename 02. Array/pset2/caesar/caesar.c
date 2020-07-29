@@ -80,17 +80,38 @@ int getSentence(char *key[]) {
     {
         if ((int)buffer[i] > 64 && (int)buffer[i] < 91)
         {
-            tempChar = (int)buffer[i] + atoi(*key);
-            test = tempChar;
-            snprintf(result, *buffer, "%c", test); // convert int to string
-            printf("%s", result);
+            tempChar = ((int)buffer[i] + atoi(*key) - 64) % 26;
+            printf("%i", tempChar);
+            if (tempChar == 0)
+            {
+                test = tempChar;
+                snprintf(result, *buffer, "%c", test + 90); // convert int to string
+                printf("%s", result);
+            }
+            else
+            {
+                test = tempChar;
+                snprintf(result, *buffer, "%c", test + 64); // convert int to string
+                printf("%s", result);
+            }
+            // test = tempChar;
         }
         else if ((int)buffer[i] > 96 && (int)buffer[i] < 123)
         {
-            tempChar = (int)buffer[i] + atoi(*key);
-            test = tempChar;
-            snprintf(result, *buffer, "%c", test); // convert int to string
-            printf("%s", result);
+            tempChar = ((int)buffer[i] + atoi(*key) - 96) % 26;
+            printf("%i", tempChar);
+            if (tempChar == 0)
+            {
+                test = tempChar;
+                snprintf(result, *buffer, "%c", test + 122); // convert int to string
+                printf("%s", result);
+            }
+            else
+            {
+                test = tempChar;
+                snprintf(result, *buffer, "%c", test + 96); // convert int to string
+                printf("%s", result);
+            }
         }
         else
         {
