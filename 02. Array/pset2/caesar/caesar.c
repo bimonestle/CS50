@@ -10,9 +10,26 @@ int getSentence(char *arg[]);
 
 int main(int argc, char *argv[])
 {
-    countArgv(argc, &argv[1]);
-
-    return 0;
+    if (argc == 2)
+    {
+        int valid = valKey(&argv[1]);
+        if (valid > 0)
+        {
+            printf("Success\n");
+            getSentence(&argv[1]);
+            return 0;
+        }
+        else
+        {
+            printf("Usage: ./caesar {int key}\n");
+            return 1;
+        }
+    }
+    else
+    {
+        printf("Usage: ./caesar {int key}\n");
+        return 1;
+    }
 }
 
 int countArgv(int count, char *arg[]) {
