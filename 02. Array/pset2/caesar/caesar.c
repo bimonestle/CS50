@@ -54,6 +54,7 @@ int readKey(char *arg[]) {
     return 1;
 }
 
+// Chech if the argument contains letter. Return 1 if contains no letter
 int valKey(char *arg[]) {
     int length = strlen(*arg);
     int result = 0;
@@ -72,6 +73,7 @@ int valKey(char *arg[]) {
     return 1;
 }
 
+// Get the entered text
 int getSentence(char *key[]) {
     printf("This is %i\n", atoi(*key));
     char* buffer;
