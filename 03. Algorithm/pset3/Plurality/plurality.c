@@ -2,6 +2,7 @@
 #include <string.h>
 
 int argCheck(char* args[], int argc);
+int NoV();
 
 int main(int argc, char* argv[]) {
     if (argc < 2)
@@ -11,6 +12,7 @@ int main(int argc, char* argv[]) {
     }
     else
     {
+        // Check if argv has duplicate name of candidate
         int check = argCheck(argv, argc);
         if (check > 0)
         {
@@ -19,6 +21,9 @@ int main(int argc, char* argv[]) {
             {
                 printf("Candidate's name entered: '%s'\n", argv[i]);
             }
+
+            // Enter how many voters needed
+            NoV();
         }
         else
         {
@@ -48,4 +53,13 @@ int argCheck(char* args[], int argc) {
         }
     }
     return 1;
+}
+
+// Enter how many voters needed
+int NoV() {
+    int voters;
+    printf("Number of voters: ");
+    scanf("%d", &voters);
+
+    return voters;
 }
