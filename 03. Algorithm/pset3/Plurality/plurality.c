@@ -1,8 +1,20 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+// Max number of candidates
+#define MAX 9
+
+// Candidates have name & vote count
+typedef struct {
+    char name;
+    int votes;
+}
+candidate;
 
 int argCheck(char* args[], int argc);
-int NoV();
+bool Vote();
 
 int main(int argc, char* argv[]) {
     if (argc < 2)
@@ -23,7 +35,7 @@ int main(int argc, char* argv[]) {
             }
 
             // Enter how many voters needed
-            NoV();
+            Vote();
         }
         else
         {
@@ -55,11 +67,29 @@ int argCheck(char* args[], int argc) {
     return 1;
 }
 
-// Enter how many voters needed
+// Enter the number for how many voters needed
+// Returns the entered number
 int NoV() {
     int voters;
     printf("Number of voters: ");
     scanf("%d", &voters);
 
     return voters;
+}
+
+// Vote the candidate
+bool Vote() {
+    char *name;
+    int len = 1;
+    int voters = NoV();
+    name = malloc(sizeof(char*) * len);
+
+    // Matching it with the number of voters
+    for (int i = 0; i < voters; i++)
+    {
+        printf("Vote: ");
+        scanf("%s", name);
+    }
+    
+    return true;
 }
