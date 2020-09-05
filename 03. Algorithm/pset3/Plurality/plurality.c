@@ -141,3 +141,16 @@ int largestVote(candidate candidates[], int size) {
     }
     return max;
 }
+
+// Print the candidate's name who has the most votes.
+void printWinner(void) {
+    int n = sizeof(candidates)/sizeof(candidates[0]);
+    int max = largestVote(candidates, n);
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].votes == max)
+        {
+            printf("The winner is %s. With total votes of %i\n", candidates[i].name, candidates[i].votes);
+        }   
+    }
+}
