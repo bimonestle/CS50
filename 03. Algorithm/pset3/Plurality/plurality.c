@@ -143,9 +143,15 @@ int largestVote(candidate candidates[], int size) {
 void printWinner(void) {
     int n = sizeof(candidates)/sizeof(candidates[0]);
     int max = largestVote(candidates, n);
+
+    if (max == 0)
+    {
+        printf("There is no winner in this vote\n");
+    }
+    
     for (int i = 0; i < candidate_count; i++)
     {
-        if (candidates[i].votes == max)
+        if (candidates[i].votes == max && max > 0)
         {
             printf("The winner is %s. With total votes of %i\n", candidates[i].name, candidates[i].votes);
         }   
