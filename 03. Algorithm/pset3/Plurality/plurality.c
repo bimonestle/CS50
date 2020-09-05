@@ -110,15 +110,12 @@ bool Vote(char *name) {
             candidates[j].votes++;
             validCount++;
         }
-        else
-        {
-            printf("Invalid candidate's name\n");
-        }
     }
     if (validCount != 0)
     {
         return true;
     }
+    printf("Invalid candidate's name\n");
     return false;
 }
 
