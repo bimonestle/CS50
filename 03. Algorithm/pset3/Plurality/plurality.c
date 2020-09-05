@@ -23,6 +23,7 @@ int candidate_count;
 int argCheck(char* args[], int argc);
 int NoV();
 bool Vote(char *name);
+void printWinner(void);
 
 int main(int argc, char* argv[]) {
     // Check for invalid usage
@@ -59,11 +60,9 @@ int main(int argc, char* argv[]) {
         printf("I vote: ");
         scanf("%s", name);
 
-        // Check for invalid vote
         Vote(name);
-        
-        
     }
+    printWinner();
 }
 
 // Check arguments if the name of candidate has duplicate
@@ -98,17 +97,17 @@ int NoV() {
     return voters;
 }
 
+// Vote for a candidate.
+// It takes a char* as an argument
 bool Vote(char *name) {
-    // Counter for boolean
+    // Counter for candidate's name validity
     int validCount;
 
     for (int j = 0; j < candidate_count; j++)
     {
         if (strcmp(name, candidates[j].name) == 0)
         {
-            printf("You vote for %s\n", candidates[j].name);
             candidates[j].votes++;
-            printf("%s total vote is %i\n", candidates[j].name, candidates[j].votes);
             validCount++;
         }
         else
@@ -116,10 +115,29 @@ bool Vote(char *name) {
             printf("Invalid candidate's name\n");
         }
     }
-    printf("Count is %i", validCount);
     if (validCount != 0)
     {
         return true;
     }
     return false;
+}
+
+// Find candidates who have the largest vote.
+// Find the maximum in arr[] of size n
+int largestVote(candidate candidates[], int size) {
+    int i;
+
+    // Initialize the maximum element
+    int max = candidates[0].votes;
+
+    // Traverse array elements from second and
+    // compare every element with current max
+    for (int i = 1; i < size; i++)
+    {
+        if (candidates[i].votes > max)
+        {
+            max = candidates[i].votes;
+        }
+    }
+    return max;
 }
