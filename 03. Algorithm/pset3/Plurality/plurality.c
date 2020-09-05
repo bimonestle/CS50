@@ -8,40 +8,61 @@
 
 // Candidates have name & vote count
 typedef struct {
-    char name;
+    char *name;
     int votes;
 }
 candidate;
 
+// Array of candidates
+// Determine the size of a candidate arrays
+candidate candidates[MAX];
+
+// Number of candidates
+int candidate_count;
+
 int argCheck(char* args[], int argc);
-bool Vote();
+int NoV();
+bool Vote(char *name);
 
 int main(int argc, char* argv[]) {
+    // Check for invalid usage
     if (argc < 2)
     {
-        printf("Please enter candidate's name");
+        printf("Usage: ./plurality [candidate ...]\n");
+        printf("Please enter candidate's name\n");
         return 1;
     }
-    else
-    {
-        // Check if argv has duplicate name of candidate
-        int check = argCheck(argv, argc);
-        if (check > 0)
-        {
-            printf("Success, %i candidate's name entered\n", argc - 1);
-            for (int i = 1; i <= argc - 1; i++)
-            {
-                printf("Candidate's name entered: '%s'\n", argv[i]);
-            }
 
-            // Enter how many voters needed
-            Vote();
-        }
-        else
-        {
-            printf("There is a duplicate in candidate's name\n");
-        }
-        return 0;
+    // Populate array of candidates and assigns it with initial value;
+    // Candidate.name = "Their Name"
+    // Candidate.votes = 0
+    candidate_count = argc - 1;
+    if (candidate_count > MAX)
+    {
+        printf("The maximum number of candidates is %i", MAX);
+        return 2;
+    }
+    for (int i = 0; i < candidate_count; i++)
+    {
+        candidates[i].name = argv[i + 1];
+        candidates[i].votes = 0;
+    }
+    
+    int voters_count = NoV();
+
+    // Loop over all voters
+    for (int i = 0; i < voters_count; i++)
+    {
+        char *name;
+        int len = 1;
+        name = (char*) malloc(sizeof(char*) * len);
+        printf("I vote: ");
+        scanf("%s", name);
+
+        // Check for invalid vote
+        Vote(name);
+        
+        
     }
 }
 
@@ -77,19 +98,28 @@ int NoV() {
     return voters;
 }
 
-// Vote the candidate
-bool Vote() {
-    char *name;
-    int len = 1;
-    int voters = NoV();
-    name = malloc(sizeof(char*) * len);
+bool Vote(char *name) {
+    // Counter for boolean
+    int validCount;
 
-    // Matching it with the number of voters
-    for (int i = 0; i < voters; i++)
+    for (int j = 0; j < candidate_count; j++)
     {
-        printf("Vote: ");
-        scanf("%s", name);
+        if (strcmp(name, candidates[j].name) == 0)
+        {
+            printf("You vote for %s\n", candidates[j].name);
+            candidates[j].votes++;
+            printf("%s total vote is %i\n", candidates[j].name, candidates[j].votes);
+            validCount++;
+        }
+        else
+        {
+            printf("Invalid candidate's name\n");
+        }
     }
-    
-    return true;
+    printf("Count is %i", validCount);
+    if (validCount != 0)
+    {
+        return true;
+    }
+    return false;
 }
