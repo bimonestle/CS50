@@ -26,6 +26,8 @@ int pairCount;
 int candidateCount;
 
 // Function prototypes
+bool Vote(int rank, char name, int ranks[]);
+char entName();
 
 
 int main(int argc, char* argv[]) {
@@ -70,9 +72,37 @@ int main(int argc, char* argv[]) {
         // Query for each ranks
         for (int j = 0; j < candidateCount; j++)
         {
-            /* code */
+            printf("Rank %i: ", j + 1);
+            char name = entName();
+
+            if (!Vote(j, name, ranks))
+            {
+                printf("Invalid vote.\n");
+                return 3;
+            }
+            
         }
         
     }
     return 0;
+}
+
+// Update ranks. Given a new vote
+bool Vote(int rank, char name, int ranks[]) {
+
+    return false;
+}
+
+// Enter the name of the candidate
+char entName() {
+    char *string;
+    scanf("%ms", &string);
+
+    return *string;
+}
+
+// Update preferences given one voter's ranks
+void recordPreferences(int ranks[]) {
+    // TODO
+    return;
 }
