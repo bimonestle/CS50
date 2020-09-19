@@ -82,7 +82,7 @@ int main(int argc, char* argv[]) {
             char* name = entName();
             printf("test: %s\n", name);
 
-            if (!Vote(j, *name, ranks))
+            if (Vote(j, *name, ranks))
             {
                 printf("Invalid vote.\n");
                 return 3;
@@ -106,15 +106,35 @@ bool Vote(int rank, char name, int ranks[]) {
 
     // If no name is found,
     // don't update any ranks and return false.
+
+    int validCount;
+    char* candidate = &name;
+    candidate = malloc(sizeof(char) * 1);
+    free(candidate);
+    
+    for (int i = 0; i < candidateCount; i++)
+    {
+        
+        printf("%c", candidates[i]);
+        // printf("aaa: %s\n", &argv);
+
+        // if (strcmp(candidate, argv))
+        // {
+        //     validCount++;
+        // }   
+    }
+    if (validCount != 0)
+    {
+        return true;
+    }
     return false;
 }
 
 // Enter the name of the candidate
 char* entName() {
     char* string;
-    int validCount;
-    int len = 1;
-    string = (char*) malloc(sizeof(char) * (len));
+    string = (char*) malloc(sizeof(char) * 1);
+    free(string);
     scanf("%s", string);
     printf("I vote: %s\n", string);
     return string;
