@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 
 // Max number of candidates
 #define MAX 9
@@ -28,7 +29,7 @@ int candidateCount;
 
 // Function prototypes
 bool Vote(int rank, char name, int ranks[]);
-char entName();
+char* entName();
 void recordPreferences(int ranks[]);
 
 
@@ -62,30 +63,35 @@ int main(int argc, char* argv[]) {
     }
     
     pairCount = 0;
+    int votersCount;
     printf("Number of voters: ");
-    int votersCount = scanf("%i", &votersCount);
+    scanf("%i", &votersCount);
     
-    // Query for votes
+    // QUERY FOR VOTES
     for (int i = 0; i < votersCount; i++)
     {
+        printf("VOTERS %i\n", i+1);
         // ranks[i] is voter's ith preference
         int ranks[candidateCount];
 
-        // Query for each ranks
+        // QUERY FOR EACH RANKS
+        // for (int j = 0; j < votersCount; j++)
         for (int j = 0; j < candidateCount; j++)
         {
             printf("Rank %i: ", j + 1);
-            char name = entName();
+            char* name = entName();
+            printf("test: %s\n", name);
 
-            // if (!Vote(j, name, ranks))
-            // {
-            //     printf("Invalid vote.\n");
-            //     return 3;
-            // }
+            if (!Vote(j, *name, ranks))
+            {
+                printf("Invalid vote.\n");
+                return 3;
+            }
+            
         }
 
         recordPreferences(ranks);
-        // printf("\n");
+        printf("\n");
     }
 
     return 0;
@@ -104,14 +110,14 @@ bool Vote(int rank, char name, int ranks[]) {
 }
 
 // Enter the name of the candidate
-char entName() {
-    char *string;
+char* entName() {
+    char* string;
+    int validCount;
     int len = 1;
-    string = (char*) malloc(sizeof(char*) * len);
+    string = (char*) malloc(sizeof(char) * (len));
     scanf("%s", string);
-    printf("\nI vote: %s\n", string);
-
-    return *string;
+    printf("I vote: %s\n", string);
+    return string;
 }
 
 // Update preferences given one voter's ranks
