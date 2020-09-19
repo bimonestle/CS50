@@ -20,7 +20,7 @@ typedef struct {
 pair;
 
 // Array of candidates
-char candidates[MAX];
+char *candidates[MAX];
 pair pairs[MAX * (MAX - 1) / 2];
 
 // Global variables
@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
     }
     for (int i = 0; i < candidateCount; i++)
     {
-        candidates[i] = *argv[i + 1];
+        candidates[i] = argv[i + 1];
     }
 
     // Clear graph locked in pairs
@@ -80,9 +80,8 @@ int main(int argc, char* argv[]) {
         {
             printf("Rank %i: ", j + 1);
             char* name = entName();
-            printf("test: %s\n", name);
 
-            if (Vote(j, *name, ranks))
+            if (!Vote(j, *name, ranks))
             {
                 printf("Invalid vote.\n");
                 return 3;
@@ -107,21 +106,20 @@ bool Vote(int rank, char name, int ranks[]) {
     // If no name is found,
     // don't update any ranks and return false.
 
-    int validCount;
+    int validCount = 0;
     char* candidate = &name;
     candidate = malloc(sizeof(char) * 1);
     free(candidate);
     
     for (int i = 0; i < candidateCount; i++)
     {
-        
-        printf("%c", candidates[i]);
-        // printf("aaa: %s\n", &argv);
-
-        // if (strcmp(candidate, argv))
-        // {
-        //     validCount++;
-        // }   
+        char* argv = candidates[i];
+        printf("%s\n", argv);
+        if (strcmp(candidate, argv) == 0)
+        {
+            printf("Valid Count: %i\n", validCount);
+            validCount++;
+        }   
     }
     if (validCount != 0)
     {
