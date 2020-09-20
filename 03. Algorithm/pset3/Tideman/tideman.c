@@ -113,6 +113,12 @@ bool Vote(int rank, char* name, int ranks[]) {
         if (strcmp(name, candidates[i]) == 0)
         {
             validCount += 1;
+
+            // e.g:
+            // Voter 1: ranks[0] == 2. Jon, ranks[1] == Bimo.
+            // Voter 2: ranks[0] == 1. Bimo, ranks[1] == Jon.
+            // Voter 3: ranks[0] == 2. Jon, ranks[1] == Bimo.
+            ranks[i] = i+1;
         }
     }
     if (validCount > 0)
