@@ -20,7 +20,7 @@ typedef struct {
 pair;
 
 // Array of candidates
-char *candidates[MAX];
+char* candidates[MAX];
 pair pairs[MAX * (MAX - 1) / 2];
 
 // Global variables
@@ -28,7 +28,7 @@ int pairCount;
 int candidateCount;
 
 // Function prototypes
-bool Vote(int rank, char name, int ranks[]);
+bool Vote(int rank, char* name, int ranks[]);
 char* entName();
 void recordPreferences(int ranks[]);
 
@@ -51,6 +51,7 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < candidateCount; i++)
     {
         candidates[i] = argv[i + 1];
+        printf("argv[%i]: %s\n",i+1 , candidates[i]);
     }
 
     // Clear graph locked in pairs
@@ -80,15 +81,15 @@ int main(int argc, char* argv[]) {
         {
             printf("Rank %i: ", j + 1);
             char* name = entName();
+            name = (char*)malloc(sizeof(char) * 1 + 1);
+            printf("name is %s\n", name);
 
-            if (!Vote(j, *name, ranks))
+            if (!Vote(j, name, ranks))
             {
                 printf("Invalid vote.\n");
                 return 3;
-            }
-            
+            }   
         }
-
         recordPreferences(ranks);
         printf("\n");
     }
@@ -97,7 +98,7 @@ int main(int argc, char* argv[]) {
 }
 
 // Update ranks. Given a new vote
-bool Vote(int rank, char name, int ranks[]) {
+bool Vote(int rank, char* name, int ranks[]) {
     // TO DO
     // If name is found among the candidates,
     // update ranks and return true.
@@ -105,24 +106,19 @@ bool Vote(int rank, char name, int ranks[]) {
 
     // If no name is found,
     // don't update any ranks and return false.
-
+    printf("Vote for %s\n", name);
     int validCount = 0;
-    char* candidate = &name;
-    candidate = malloc(sizeof(char) * 1);
-    free(candidate);
-    
     for (int i = 0; i < candidateCount; i++)
     {
-        char* argv = candidates[i];
-        printf("%s\n", argv);
-        if (strcmp(candidate, argv) == 0)
+        printf("Candidate %i = %s\n", i+1, candidates[i]);
+        if (strcmp(name, candidates[i+1]) == 0)
         {
-            printf("Valid Count: %i\n", validCount);
-            validCount++;
-        }   
+            validCount += 1;
+        }
     }
-    if (validCount != 0)
+    if (validCount > 0)
     {
+        printf("validCount = %i\n", validCount);
         return true;
     }
     return false;
@@ -134,7 +130,7 @@ char* entName() {
     string = (char*) malloc(sizeof(char) * 1);
     free(string);
     scanf("%s", string);
-    printf("I vote: %s\n", string);
+    // printf("I vote: %s\n", string);
     return string;
 }
 
