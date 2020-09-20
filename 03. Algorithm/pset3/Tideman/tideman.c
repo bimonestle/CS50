@@ -81,7 +81,6 @@ int main(int argc, char* argv[]) {
         {
             printf("Rank %i: ", j + 1);
             char* name = entName();
-            name = (char*)malloc(sizeof(char) * 1 + 1);
             printf("name is %s\n", name);
 
             if (!Vote(j, name, ranks))
@@ -111,7 +110,7 @@ bool Vote(int rank, char* name, int ranks[]) {
     for (int i = 0; i < candidateCount; i++)
     {
         printf("Candidate %i = %s\n", i+1, candidates[i]);
-        if (strcmp(name, candidates[i+1]) == 0)
+        if (strcmp(name, candidates[i]) == 0)
         {
             validCount += 1;
         }
@@ -127,7 +126,7 @@ bool Vote(int rank, char* name, int ranks[]) {
 // Enter the name of the candidate
 char* entName() {
     char* string;
-    string = (char*) malloc(sizeof(char) * 1);
+    string = (char*) malloc(sizeof(char) * 1 + 1);
     free(string);
     scanf("%s", string);
     // printf("I vote: %s\n", string);
