@@ -118,7 +118,7 @@ bool Vote(int rank, char* name, int ranks[]) {
             // Voter 1: ranks[0] == 2. Jon, ranks[1] == Bimo.
             // Voter 2: ranks[0] == 1. Bimo, ranks[1] == Jon.
             // Voter 3: ranks[0] == 2. Jon, ranks[1] == Bimo.
-            ranks[i] = i+1;
+            ranks[rank] = i;
         }
     }
     if (validCount > 0)
