@@ -149,6 +149,16 @@ char* entName() {
 // Update preferences given one voter's ranks
 void recordPreferences(int ranks[]) {
     // TODO
+    // Update the preferences array based on the current voter's ranks
+    for (int i = 0; i < votersCount; i++)
+    {
+        for (int j = 0; j < candidateCount; j++)
+        {
+            preferences[i][j] = j;
+        }
+        
+    }
+    
     return;
 }
 
