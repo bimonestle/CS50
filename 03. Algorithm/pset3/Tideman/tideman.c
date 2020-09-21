@@ -89,6 +89,12 @@ int main(int argc, char* argv[]) {
                 return 3;
             }   
         }
+
+        // Checking ranks array
+        for (int k = 0; k < candidateCount; k++)
+        {
+            printf("Candidate %i, ", ranks[k]);
+        }
         recordPreferences(ranks);
         printf("\n");
     }
@@ -118,6 +124,7 @@ bool Vote(int rank, char* name, int ranks[]) {
             // Voter 1: ranks[0] == 2. Jon, ranks[1] == Bimo.
             // Voter 2: ranks[0] == 1. Bimo, ranks[1] == Jon.
             // Voter 3: ranks[0] == 2. Jon, ranks[1] == Bimo.
+            // Populate array of ranks with voter's preference
             ranks[rank] = i;
         }
     }
