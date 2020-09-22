@@ -150,15 +150,24 @@ char* entName() {
 void recordPreferences(int ranks[]) {
     // TODO
     // Update the preferences array based on the current voter's ranks
-    for (int i = 0; i < votersCount; i++)
+    int numbOfVoters = 0;
+    printf("Number of Voters: %i\n", numbOfVoters);
+
+    for (int i = 0; i < candidateCount; i++)
     {
         for (int j = 0; j < candidateCount; j++)
         {
-            preferences[i][j] = j;
+            printf("Candidate[%i] vs Candidate [%i]\n",i, j);
+            if (ranks[i] != ranks[j])
+            {
+                preferences[ranks[i]][ranks[j]] = ranks[i];
+                numbOfVoters++;
+                printf("Number of Voters who prefers Candidate [%i] over Candidate [%i] is %i\n", ranks[i], ranks[j], numbOfVoters);
+            }
         }
         
     }
-    
+    printf("Total vote: %i\n", numbOfVoters);
     return;
 }
 
