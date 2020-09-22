@@ -160,12 +160,19 @@ void recordPreferences(int ranks[]) {
             printf("Candidate[%i] vs Candidate [%i]\n",i, j);
             if (ranks[i] != ranks[j])
             {
-                preferences[ranks[i]][ranks[j]] = ranks[i];
-                numbOfVoters++;
+                if (i == candidateCount - 1)
+                {
+                    numbOfVoters = 0;
+                }
+                else
+                {
+                    preferences[ranks[i]][ranks[j]] = ranks[i];
+                    numbOfVoters++;
+                }
                 printf("Number of Voters who prefers Candidate [%i] over Candidate [%i] is %i\n", ranks[i], ranks[j], numbOfVoters);
             }
         }
-        
+        numbOfVoters = 0;
     }
     printf("Total vote: %i\n", numbOfVoters);
     return;
