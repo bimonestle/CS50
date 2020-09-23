@@ -81,7 +81,7 @@ int main(int argc, char* argv[]) {
         {
             printf("Rank %i: ", j + 1);
             char* name = entName();
-            printf("name is %s\n", name);
+            // printf("name is %s\n", name);
 
             if (!Vote(j, name, ranks))
             {
@@ -90,11 +90,6 @@ int main(int argc, char* argv[]) {
             }   
         }
 
-        // Checking ranks array
-        for (int k = 0; k < candidateCount; k++)
-        {
-            printf("Candidate %i, ", ranks[k]);
-        }
         recordPreferences(ranks);
         printf("\n");
     }
@@ -111,11 +106,11 @@ bool Vote(int rank, char* name, int ranks[]) {
 
     // If no name is found,
     // don't update any ranks and return false.
-    printf("Vote for %s\n", name);
+    // printf("Vote for %s\n", name);
     int validCount = 0;
     for (int i = 0; i < candidateCount; i++)
     {
-        printf("Candidate %i = %s\n", i+1, candidates[i]);
+        // printf("Candidate %i = %s\n", i+1, candidates[i]);
         if (strcmp(name, candidates[i]) == 0)
         {
             validCount += 1;
@@ -130,7 +125,7 @@ bool Vote(int rank, char* name, int ranks[]) {
     }
     if (validCount > 0)
     {
-        printf("validCount = %i\n", validCount);
+        // printf("validCount = %i\n", validCount);
         return true;
     }
     return false;
@@ -150,31 +145,20 @@ char* entName() {
 void recordPreferences(int ranks[]) {
     // TODO
     // Update the preferences array based on the current voter's ranks
-    int numbOfVoters = 0;
-    printf("Number of Voters: %i\n", numbOfVoters);
-
+    printf("[");
     for (int i = 0; i < candidateCount; i++)
     {
+        printf("[");
         for (int j = 0; j < candidateCount; j++)
         {
-            printf("Candidate[%i] vs Candidate [%i]\n",i, j);
-            if (ranks[i] != ranks[j])
-            {
-                if (i == candidateCount - 1)
-                {
-                    numbOfVoters = 0;
-                }
-                else
-                {
-                    preferences[ranks[i]][ranks[j]] = ranks[i];
-                    numbOfVoters++;
-                }
-                printf("Number of Voters who prefers Candidate [%i] over Candidate [%i] is %i\n", ranks[i], ranks[j], numbOfVoters);
-            }
+            preferences[i][j] = ranks[j];
+            preferences[i][i] = preferences[i][j];
+            // printf("Candidate[%i] vs Candidate [%i]\n",i, j);
+            printf("%i", preferences[i][j]);
         }
-        numbOfVoters = 0;
+        printf("]");
     }
-    printf("Total vote: %i\n", numbOfVoters);
+    printf("]\n");
     return;
 }
 
