@@ -89,6 +89,7 @@ int main(int argc, char* argv[]) {
                 printf("Invalid vote.\n");
                 return 3;
             }   
+            printf("ranks %i: %i,\n", j, ranks[j]);
         }
 
         recordPreferences(ranks);
@@ -152,8 +153,12 @@ void recordPreferences(int ranks[]) {
         printf("[");
         for (int j = 0; j < candidateCount; j++)
         {
-            preferences[ranks[i]][ranks[j]]++;
-            printf("%i", preferences[i][j]);
+            if (j != i)
+            {
+                preferences[ranks[i]][ranks[j]]++;
+                printf("%i", preferences[i][j]);
+                // printf("%i > %i, ", ranks[i], ranks[j]);
+            }
         }
         printf("]");
     }
